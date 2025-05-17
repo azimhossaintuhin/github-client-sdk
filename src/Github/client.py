@@ -1,7 +1,6 @@
 import httpx
-from .exceptions import GitHubError, APIError ,AuthenticationError
+from .exceptions import GitHubError, APIError, AuthenticationError
 import json
-
 
 
 class GitHubClient:
@@ -51,13 +50,13 @@ class GitHubClient:
     APIError
         If there's an error in the API response.
     """
-    
-    # befor creating the class 
+
+    # befor creating the class
     def __new__(cls, token: str):
         if not token:
             raise AuthenticationError("Token is required")
         return super().__new__(cls)
-    
+
     def __init__(self, token: str):
         self.token = token
         self.base_url = "https://api.github.com"
@@ -70,26 +69,25 @@ class GitHubClient:
             headers=self.headers,
             timeout=30,
         )
-        
-        
-        
+
+
     # Get request
-    def get(self, endpoint:str,params:dict=None):
+    def get(self, endpoint: str, params: dict = None):
         try:
             url = f"{self.base_url}/{endpoint}"
-            response = self.client.get(url,params=params)
+            response = self.client.get(url, params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
             raise APIError(f"HTTP error occurred: {e}")
         except Exception as e:
             raise GitHubError(f"An error occurred: {e}")
-        
+
     # post request
-    def post(self, endpoint:str,data:dict=None , params:dict=None):
+    def post(self, endpoint: str, data: dict = None, params: dict = None):
         try:
             url = f"{self.base_url}/{endpoint}"
-            response = self.client.post(url,json=data,params=params)
+            response = self.client.post(url, json=data, params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
@@ -98,29 +96,25 @@ class GitHubClient:
             raise Exception(f"An error occurred: {e}")
 
     # put request
-    def put(self, endpoint:str,data:dict=None , params:dict=None):
+    def put(self, endpoint: str, data: dict = None, params: dict = None):
         try:
             url = f"{self.base_url}/{endpoint}"
-            response = self.client.put(url,json=data,params=params)
+            response = self.client.put(url, json=data, params=params)
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
             raise Exception(f"HTTP error occurred: {e}")
         except Exception as e:
             raise Exception(f"An error occurred: {e}")
-    
+
     # delete request
-    def delete(self, endpoint:str,params:dict=None):
+    def delete(self, endpoint: str, params: dict = None):
         try:
             url = f"{self.base_url}/{endpoint}"
-            response = self.client.delete(url,params=params)
+            response = self.client.delete(url, params=params)
             response.raise_for_status()
-            return response.json() 
+            return response.json()
         except httpx.HTTPStatusError as e:
             raise Exception(f"HTTP error occurred: {e}")
         except Exception as e:
             raise Exception(f"An error occurred: {e}")
-        
-        
-        
-        

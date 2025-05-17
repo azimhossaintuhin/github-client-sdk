@@ -24,6 +24,7 @@ class APIError(GitHubError):
         self.response = response
         super().__init__(message) 
         
- 
-    
-   
+class CredentialsError(GitHubError):
+    """Raised when there's an error in the GitHub credentials."""
+    pass
+

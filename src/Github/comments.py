@@ -1,7 +1,7 @@
-from clients import GithubClient
+from .client import GitHubClient
 
 class Comments:
-    def __init__(self, client: GithubClient,username:str,repo:str):
+    def __init__(self, client: GitHubClient,username:str,repo:str):
         self.client = client
         self.username = username
         self.repo = repo

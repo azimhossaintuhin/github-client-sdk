@@ -1,7 +1,7 @@
-from .clients import GithubClient
+from .client import GitHubClient
 
 class Repo:
-    def __init__(self, client: GithubClient,username:str):
+    def __init__(self, client: GitHubClient,username:str):
         self.client = client
         self.username = username
         

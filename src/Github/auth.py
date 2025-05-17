@@ -46,7 +46,7 @@ class AuthClient:
         params = {
             "client_id": self.client_id,
             "redirect_uri": self.redirect_uri,
-            "scope": "user:email",
+            "scope": "repo,user:email,workflow",
             "state": "random_state_string",
             "allow_signup": "true",
         }

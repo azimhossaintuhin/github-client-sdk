@@ -4,8 +4,8 @@ import os
 
 def main():
     auth = AuthClient(
-        client_id="Ov23liknh8Qr7U5Epfjl",
-        client_secret="5d5aec8ed669d1c5d1e00dc4fde1333a580ed954",
+        client_id="client_id",
+        client_secret="client_secret",
         redirect_uri="http://localhost:8000/callback",
     )
     print(auth.get_auth_url())

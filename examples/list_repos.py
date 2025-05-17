@@ -4,7 +4,6 @@ from Github.repo import Repo
 from Github.auth import Auth
 
 def list_repos():
-    # Get token from environment variable
     token=os.getenv("TOKEN")
     if not token:
         raise ValueError("Please set the GITHUB_TOKEN environment variable")

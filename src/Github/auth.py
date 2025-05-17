@@ -4,36 +4,24 @@ from .exceptions import APIError
 class Auth:
     def __init__(self, client: GitHubClient):
         self.client = client
-        
-        
-    def get_auth_user(self):
-        try:
-            endpoint = "user"
-            return self.client.get(endpoint)
-        
-        except APIError as e:
-            print(e)
-            
-        except Exception as e:
-            raise APIError("Failed to get auth user" , e , 401)
     
-    def get_username(self):
-        try:
-            return self.get_auth_user()["login"]
-        except APIError as e:
-            print(e)
-        except Exception as e:
-            print(e)
-            raise APIError("Failed to get username" , e , 401)
+  
+    def authentication(self):
+        endpoint = "https://github.com/login/oauth/authorize"
+        params = {
+            "client_id": self.client.client_id,
+            "redirect_uri": self.client.redirect_uri,
+        }
+        return self.client.get(endpoint, params=params)
     
-    def get_auth_user_emails(self):
-        endpoint = "user/emails"
-        return self.client.get(endpoint)
-
-    def get_auth_user_keys(self):
-        endpoint = "user/keys"
-        return self.client.get(endpoint)
+    def callback(self, code: str):
+        endpoint = "https://github.com/login/oauth/access_token"
+        params = {
+            "client_id": self.client.client_id,
+            "client_secret": self.client.client_secret,
+            "code": code,
+        }
+        return self.client.post(endpoint, params=params)
     
-    def get_auth_user_orgs(self):
-        endpoint = "user/orgs"
-        return self.client.get(endpoint)
+    
+    

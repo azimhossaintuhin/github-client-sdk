@@ -1,7 +1,7 @@
 
-# Github SDK
+# GitHub Client
 
-The **Github SDK** is a robust Python library designed for seamless interaction with the GitHub API. It offers an intuitive interface for managing GitHub workflows, environment variables, and various repository actions. This SDK simplifies automation tasks such as workflow management and environment variable configuration, making it ideal for developers looking to integrate GitHub operations into their Python projects.
+The **GitHub Client** is a robust Python library designed for seamless interaction with the GitHub API. It offers an intuitive interface for managing GitHub workflows, environment variables, and various repository actions. This SDK simplifies automation tasks such as workflow management and environment variable configuration, making it ideal for developers looking to integrate GitHub operations into their Python projects.
 
 ## Features
 
@@ -13,7 +13,7 @@ The **Github SDK** is a robust Python library designed for seamless interaction 
 
 ## Installation
 
-To install and set up the **Github SDK**, clone the repository and install the required dependencies:
+To install and set up the **GitHub Client**, clone the repository and install the required dependencies:
 
 ```bash
 git clone https://github.com/azimhossaintuhin/Github_SDK.git
@@ -118,7 +118,7 @@ print(f"Environment variable updated: {response}")
 
 ## Contributing
 
-We welcome contributions to the **Github SDK**. If you'd like to contribute, please follow the steps below:
+We welcome contributions to the **GitHub Client**. If you'd like to contribute, please follow the steps below:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix (`git checkout -b feature-branch`).

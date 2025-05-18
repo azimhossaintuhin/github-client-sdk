@@ -23,8 +23,8 @@ pip install -r requirements.txt
 
 ### Requirements
 
-- Python 3.9 or higher
-- `requests` library (installed via `requirements.txt`)
+- Python 3.x or higher
+- `httpx` library (installed via `requirements.txt`)
 - A GitHub account and OAuth token for authentication
 
 ## Usage
@@ -58,10 +58,11 @@ You can interact with GitHub Actions workflows in your repository using the `Wor
 To retrieve and list all workflows in a repository:
 
 ```python
+import httpx
 from Github.client import GitHubClient
 from Github.workflow import Workflow
 
-client = GitHubClient(token="your_oauth_token")
+client = GitHubClient(token="your_oauth_token", client=httpx)
 workflow = Workflow(client, "your_github_username", "your_repository_name")
 
 workflows = workflow.get_workflows("your_github_username", "your_repository_name")
@@ -99,6 +100,7 @@ The SDK also allows you to manage environment variables for your workflows.
 To create a new environment variable:
 
 ```python
+import httpx
 from Github.variables import VariableClient
 
 variable_client = VariableClient(client, "your_github_username", "your_repository_name")
@@ -133,5 +135,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Python Requests Library](https://docs.python-requests.org/en/latest/)
+- [Python httpx Library](https://www.python-httpx.org/)
 - [GitHub Actions](https://docs.github.com/en/actions)

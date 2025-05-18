@@ -33,10 +33,17 @@ class AuthClient:
         If there's an error in the API response
     """
 
-    def __init__(self, client_id: str, client_secret: str, redirect_uri: str = None):
+    def __init__(
+        self,
+        client_id: str,
+        client_secret: str,
+        redirect_uri: str = None,
+        scope: list[str] = [],
+    ):
         self.client_id = client_id
         self.client_secret = client_secret
         self.redirect_uri = redirect_uri
+        self.scope = scope
         if not self.client_id or not self.client_secret:
             raise CredentialsError("client_id and client_secret are required")
 
@@ -46,7 +53,7 @@ class AuthClient:
         params = {
             "client_id": self.client_id,
             "redirect_uri": self.redirect_uri,
-            "scope": "repo,user:email,workflow",
+            "scope": ",".join(self.scope),
             "state": "random_state_string",
             "allow_signup": "true",
         }
@@ -63,7 +70,6 @@ class AuthClient:
         headers = {"Accept": "application/json"}
         response = httpx.post(endpoint, params=params, headers=headers)
         response.raise_for_status()
-        print(response.json())
         return response.json().get("access_token")
 
     def get_user_info(self, token: str):

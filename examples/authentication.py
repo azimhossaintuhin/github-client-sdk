@@ -4,9 +4,10 @@ import os
 
 def main():
     auth = AuthClient(
-        client_id="client_id",
-        client_secret="client_secret",
+        client_id=os.getenv("CLIENT_ID"),
+        client_secret=os.getenv("CLIENT_SECRET"),
         redirect_uri="http://localhost:8000/callback",
+        scope=["repo", "user:email", "workflow"],
     )
     print(auth.get_auth_url())
 

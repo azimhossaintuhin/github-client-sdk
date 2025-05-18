@@ -1,6 +1,6 @@
-from Github.client import GitHubClient
-from Github.workflow import Workflow
-from Github.auth import AuthClient
+from github_client_sdk.client import GitHubClient
+from github_client_sdk.workflow import Workflow
+from github_client_sdk.auth import AuthClient
 import os
 
 

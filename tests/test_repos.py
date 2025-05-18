@@ -1,6 +1,6 @@
 import pytest
-from src.Github.repo import Repo
-from Github.client import GitHubClient
+from src.github_client_sdk.repo import Repo
+from github_client_sdk.client import GitHubClient
 from unittest.mock import MagicMock
 
 

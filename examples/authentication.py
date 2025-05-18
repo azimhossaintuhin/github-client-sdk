@@ -1,4 +1,4 @@
-from Github.auth import AuthClient
+from github_client_sdk.auth import AuthClient
 import os
 
 

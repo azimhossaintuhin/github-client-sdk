@@ -1,18 +1,26 @@
 [project]
-name = "GithubSDK"
+name = "github-client-sdk"
 version = "0.1.0"
-description = ""
+description = "A Python SDK for interacting with the GitHub API"
 authors = [
-    {name = "Tuhin",email = "codecommerze@gmail.com"}
+    {name = "Azim Hossain Tuhin", email = "codeocmmerze@example.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.9"
 dependencies = [
-    "httpx (>=0.28.1,<0.29.0)"
+    "httpx[http2]>=0.28.1,<0.29.0"
+]
+license = {text = "MIT"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
 ]
 
 [tool.poetry]
-packages = [{include = "Github", from = "src"}]
+name = "github-client-sdk"
+version = "0.1.0"
+packages = [{include = "github_client_sdk", from = "src"}]
 
 
 [tool.poetry.group.dev.dependencies]

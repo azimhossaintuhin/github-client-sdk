@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock
-from src.Github.auth import AuthClient
-from src.Github.exceptions import APIError, CredentialsError
+from src.github_client_sdk.auth import AuthClient
+from src.github_client_sdk.exceptions import APIError, CredentialsError
 
 
 # Mock GitHubClient (you need to adjust according to your implementation)

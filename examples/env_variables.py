@@ -1,6 +1,6 @@
-from Github.auth import AuthClient
-from Github.client import GitHubClient
-from Github.variables import Variables
+from github_client_sdk.auth import AuthClient
+from github_client_sdk.client import GitHubClient
+from github_client_sdk.variables import Variables
 import os
 
 

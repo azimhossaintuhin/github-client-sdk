@@ -1,4 +1,4 @@
-from Github.client import GitHubClient
+from github_client_sdk.client import GitHubClient
 
 class Issues:
     def __init__(self, client: GitHubClient,username:str,repo:str):

@@ -12,7 +12,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=[
-        "httpx[http2]==0.28.1",
+        "httpx[http2]>=0.28.1,<0.29.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

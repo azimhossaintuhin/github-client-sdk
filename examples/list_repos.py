@@ -1,6 +1,6 @@
 import os
-from Github.client import GitHubClient
-from Github.repo import Repo
+from github_client_sdk.client import GitHubClient
+from github_client_sdk.repo import Repo
 
 
 def list_repos():

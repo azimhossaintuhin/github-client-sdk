@@ -11,7 +11,7 @@ from .exceptions import (
     APIError,
 )
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __name__ = "github-client-sdk"
 __all__ = [
     "GitHubClient",

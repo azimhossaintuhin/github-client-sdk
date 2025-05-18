@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="github-client-sdk",
-    version="0.1.0",
+    version="1.0.0",
     author="Azim Hossain Tuhin",
     author_email="codeocmmerze@example.com",
     description="A Python SDK for interacting with the GitHub API",

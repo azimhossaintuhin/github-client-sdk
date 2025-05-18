@@ -39,7 +39,8 @@ from Github.auth import AuthClient
 authClient = AuthClient(
     client_id="your_client_id",
     client_secret="your_client_secret",
-    redirect_uri="your_redirect_uri"
+    redirect_uri="your_redirect_uri",
+    scope=[user:email]
 )
 
 auth_url = authClient.get_auth_url()

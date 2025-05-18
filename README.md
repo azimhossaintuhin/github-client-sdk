@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 ### Requirements
 
-- Python 3.x or higher
+- Python 3.9 or higher
 - `requests` library (installed via `requirements.txt`)
 - A GitHub account and OAuth token for authentication
 

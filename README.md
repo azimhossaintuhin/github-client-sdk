@@ -1,5 +1,5 @@
 
-# GitHub Client
+# GitHub Client SDK
 
 The **GitHub Client** is a robust Python library designed for seamless interaction with the GitHub API. It offers an intuitive interface for managing GitHub workflows, environment variables, and various repository actions. This SDK simplifies automation tasks such as workflow management and environment variable configuration, making it ideal for developers looking to integrate GitHub operations into their Python projects.
 
@@ -16,14 +16,14 @@ The **GitHub Client** is a robust Python library designed for seamless interacti
 To install and set up the **GitHub Client**, clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/azimhossaintuhin/Github_SDK.git
-cd Github_SDK
+git clone https://github.com/azimhossaintuhin/github-client-sdk.git
+cd github-client-sdk
 pip install -r requirements.txt
 ```
 
 ### Requirements
 
-- Python 3.x or higher
+- Python 3.9 or higher
 - `httpx` library (installed via `requirements.txt`)
 - A GitHub account and OAuth token for authentication
 
@@ -121,7 +121,7 @@ print(f"Environment variable updated: {response}")
 
 ## Contributing
 
-We welcome contributions to the **GitHub Client**. If you'd like to contribute, please follow the steps below:
+We welcome contributions to the **GitHub Client SDK**. If you'd like to contribute, please follow the steps below:
 
 1. Fork the repository.
 2. Create a new branch for your feature or bugfix (`git checkout -b feature-branch`).

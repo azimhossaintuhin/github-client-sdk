@@ -1,4 +1,4 @@
-from .exceptions import APIError, CredentialsError
+from .exceptions import CredentialsError
 import httpx
 from urllib.parse import urlencode
 from .client import GitHubClient

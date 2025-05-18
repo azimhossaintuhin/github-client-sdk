@@ -1,6 +1,6 @@
 import httpx
 from .exceptions import GitHubError, APIError, AuthenticationError
-import json
+
 
 
 class GitHubClient:

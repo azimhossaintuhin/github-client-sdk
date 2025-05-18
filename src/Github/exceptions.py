@@ -1,6 +1,3 @@
-from typing import Any
-
-
 class GitHubError(Exception):
     """Base exception class for all GitHub-related errors."""
     pass

@@ -1,19 +1,35 @@
 
-# GitHub Client SDK
+# GitHub Client SDK — Python Library for GitHub API Automation
 
-The **GitHub Client** is a robust Python library designed for seamless interaction with the GitHub API. It offers an intuitive interface for managing GitHub workflows, environment variables, and various repository actions. This SDK simplifies automation tasks such as workflow management and environment variable configuration, making it ideal for developers looking to integrate GitHub operations into their Python projects.
+[![PyPI version](https://img.shields.io/pypi/v/github-client-sdk.svg)](https://pypi.org/project/github-client-sdk/)
+[![Python Version](https://img.shields.io/pypi/pyversions/github-client-sdk.svg)](https://pypi.org/project/github-client-sdk/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/azimhossaintuhin/github-client-sdk/python-package.yml)](https://github.com/azimhossaintuhin/github-client-sdk/actions)
+[![Downloads](https://pepy.tech/badge/github-client-sdk)](https://pepy.tech/project/github-client-sdk)
 
-## Features
+## Overview
 
-- **Workflow Management**: Effortlessly create, list, and delete GitHub Actions workflows.
-- **Environment Variable Management**: Create and update environment variables for GitHub Actions workflows.
-- **OAuth Authentication**: Secure OAuth authentication for accessing GitHub repositories and performing operations.
-- **Easy Integration**: Lightweight and easy to integrate into your existing Python projects.
-- **Extensible**: Designed for further extensions and customization as per your workflow automation needs.
+**GitHub Client SDK** is a powerful and easy-to-use **Python library** designed to simplify interaction with the **GitHub REST API v3** and automate **GitHub Actions workflows**, **environment variables**, and repository management tasks. 
+
+This SDK provides a clean interface for developers, DevOps engineers, and automation specialists to seamlessly integrate GitHub operations into Python projects and CI/CD pipelines.
+
+## Key Features
+
+- 🔄 **GitHub Actions Workflow Management**: Create, list, and delete workflows effortlessly via Python.
+- 🔐 **OAuth Authentication Support**: Securely authenticate using OAuth tokens.
+- ⚙️ **Environment Variable Handling**: Create and update environment variables for GitHub workflows.
+- 🧩 **Lightweight & Extensible**: Minimal dependencies and easy to extend for custom needs.
+- 🚀 **Supports Python 3.9+**: Compatible with modern Python environments.
 
 ## Installation
 
-To install and set up the **GitHub Client**, clone the repository and install the required dependencies:
+Install the latest version of **GitHub Client SDK** directly from PyPI:
+
+```bash
+pip install github-client-sdk
+```
+
+Or clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/azimhossaintuhin/github-client-sdk.git
@@ -21,17 +37,9 @@ cd github-client-sdk
 pip install -r requirements.txt
 ```
 
-### Requirements
+## Quick Start Guide
 
-- Python 3.9 or higher
-- `httpx` library (installed via `requirements.txt`)
-- A GitHub account and OAuth token for authentication
-
-## Usage
-
-### Authentication
-
-To use the SDK, you need to authenticate via OAuth using your GitHub credentials. Follow the steps below:
+### Authenticate with GitHub using OAuth
 
 ```python
 from Github.auth import AuthClient
@@ -40,23 +48,18 @@ authClient = AuthClient(
     client_id="your_client_id",
     client_secret="your_client_secret",
     redirect_uri="your_redirect_uri",
-    scope=[user:email]
+    scope=["user:email", "repo", "workflow"]
 )
 
 auth_url = authClient.get_auth_url()
-print(f"Please visit this URL to authorize the application: {auth_url}")
-code = input("Enter the Code you received after authorization: ")
+print(f"Visit this URL to authorize: {auth_url}")
+code = input("Enter the authorization code: ")
 token = authClient.get_access_token(code)
 user_info = authClient.get_user_info(token)
+print(user_info)
 ```
 
-### Working with Workflows
-
-You can interact with GitHub Actions workflows in your repository using the `Workflow` class.
-
-#### List Workflows
-
-To retrieve and list all workflows in a repository:
+### Manage GitHub Workflows
 
 ```python
 import httpx
@@ -64,77 +67,54 @@ from Github.client import GitHubClient
 from Github.workflow import Workflow
 
 client = GitHubClient(token="your_oauth_token", client=httpx)
-workflow = Workflow(client, "your_github_username", "your_repository_name")
+workflow = Workflow(client, "github_username", "repository_name")
 
-workflows = workflow.get_workflows("your_github_username", "your_repository_name")
+# List workflows
+workflows = workflow.get_workflows("github_username", "repository_name")
 print(workflows)
+
+# Create workflow
+response = workflow.create_workflow("workflow_name", "path/to/workflow.yml")
+print(response)
+
+# Delete workflow
+workflow.delete_workflow("workflow_id")
+print("Workflow deleted successfully.")
 ```
 
-#### Create Workflow
-
-To create a new workflow in the specified repository:
+### Manage Environment Variables
 
 ```python
-workflow_name = "my_new_workflow"
-workflow_path = "path/to/your/workflow.yml"
-
-response = workflow.create_workflow(workflow_name, workflow_path)
-print(f"Workflow created successfully: {response}")
-```
-
-#### Delete Workflow
-
-To delete a specific workflow by its ID:
-
-```python
-workflow_id = "your_workflow_id"
-workflow.delete_workflow(workflow_id)
-print(f"Workflow {workflow_id} deleted successfully.")
-```
-
-### Working with Environment Variables
-
-The SDK also allows you to manage environment variables for your workflows.
-
-#### Create Variable
-
-To create a new environment variable:
-
-```python
-import httpx
 from Github.variables import VariableClient
 
-variable_client = VariableClient(client, "your_github_username", "your_repository_name")
+variable_client = VariableClient(client, "github_username", "repository_name")
 
-response = variable_client.create_variable("MY_ENV_VAR", "my_value")
-print(f"Environment variable created: {response}")
-```
+# Create variable
+response = variable_client.create_variable("MY_ENV_VAR", "value")
+print(response)
 
-#### Update Variable
-
-To update the value of an existing environment variable:
-
-```python
+# Update variable
 response = variable_client.update_variable("MY_ENV_VAR", "new_value")
-print(f"Environment variable updated: {response}")
+print(response)
 ```
+
+## Documentation
+
+Detailed documentation and examples are available at the [GitHub Client SDK Wiki](https://github.com/azimhossaintuhin/github-client-sdk/wiki).
 
 ## Contributing
 
-We welcome contributions to the **GitHub Client SDK**. If you'd like to contribute, please follow the steps below:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix (`git checkout -b feature-branch`).
-3. Commit your changes with a clear and concise message (`git commit -am 'Add new feature'`).
-4. Push your changes to your fork (`git push origin feature-branch`).
-5. Create a pull request explaining your changes.
+Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) guide before submitting a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## Related Links
 
-- [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Python httpx Library](https://www.python-httpx.org/)
-- [GitHub Actions](https://docs.github.com/en/actions)
+- [GitHub REST API Documentation](https://docs.github.com/en/rest)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [httpx HTTP Client for Python](https://www.python-httpx.org/)
+
+---
+

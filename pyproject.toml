@@ -1,7 +1,7 @@
 [project]
 name = "github-client-sdk"
-version = "1.0.0"
-description = "A Python SDK for interacting with the GitHub API"
+version = "1.1.1"
+description = "Lightweight and easy-to-use Python SDK for seamless GitHub REST API integration, automation of GitHub Actions workflows, environment variable management, and OAuth authentication."
 authors = [
     {name = "Azim Hossain Tuhin", email = "codeocmmerze@example.com"}
 ]
@@ -20,15 +20,22 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Software Distribution",
+    "Topic :: Utilities"
 ]
-keywords = ["github", "api", "sdk", "client"]
+keywords = [
+    "github", "github api", "github sdk", "python sdk", "api client",
+    "rest api", "automation", "github client", "sdk", "python", "httpx",
+    "github actions", "workflow management", "oauth authentication", "devops"
+]
 
 [tool.poetry]
 name = "github-client-sdk"
-version = "1.0.0"
+version = "1.1.1"
 packages = [{include = "github_client_sdk", from = "src"}]
-
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"

@@ -38,7 +38,7 @@ class AuthClient:
         client_id: str,
         client_secret: str,
         redirect_uri: str = None,
-        scope: list[str] = [],
+        scope: list[str] = ["user:email"],
     ):
         self.client_id = client_id
         self.client_secret = client_secret

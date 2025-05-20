@@ -8,7 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "httpx[http2]>=0.28.1,<0.29.0"
+    "httpx[http2]>=0.28.1,<0.29.0",
+    "typer[all] (>=0.15.4,<0.16.0)",
+    "pyloaders (>=0.0.5,<0.0.6)",
+    "tabulate (>=0.9.0,<0.10.0)"
 ]
 license = {text = "MIT"}
 classifiers = [
@@ -41,6 +44,7 @@ packages = [{include = "github_client_sdk", from = "src"}]
 pytest = "^8.3.5"
 pytest-cov = "^6.1.1"
 pytest-mock = "^3.14.0"
+setuptools = "^80.7.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

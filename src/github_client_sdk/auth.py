@@ -77,5 +77,4 @@ class AuthClient:
         client = GitHubClient(token)
         endpoint = "user"
         response = client.get(endpoint)
-        print(response)
         return response

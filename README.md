@@ -1,4 +1,3 @@
-
 # GitHub Client SDK — Python Library for GitHub API Automation
 
 [![PyPI version](https://img.shields.io/pypi/v/github-client-sdk.svg)](https://pypi.org/project/github-client-sdk/)
@@ -17,9 +16,10 @@ This SDK provides a clean interface for developers, DevOps engineers, and automa
 
 - 🔄 **GitHub Actions Workflow Management**: Create, list, and delete workflows effortlessly via Python.
 - 🔐 **OAuth Authentication Support**: Securely authenticate using OAuth tokens.
-- ⚙️ **Environment Variable Handling**: Create and update environment variables for GitHub workflows.
+- ⚙️ **Environment Variable Handling**: Create, update, and delete environment variables for GitHub workflows.
 - 🧩 **Lightweight & Extensible**: Minimal dependencies and easy to extend for custom needs.
 - 🚀 **Supports Python 3.9+**: Compatible with modern Python environments.
+- 💻 **Interactive CLI**: Built-in command-line interface for easy interaction.
 
 ## Installation
 
@@ -39,68 +39,109 @@ pip install -r requirements.txt
 
 ## Quick Start Guide
 
-### Authenticate with GitHub using OAuth
+### Authentication
 
 ```python
-from Github.auth import AuthClient
+from github_client_sdk.auth import AuthClient
+import os
 
-authClient = AuthClient(
-    client_id="your_client_id",
-    client_secret="your_client_secret",
-    redirect_uri="your_redirect_uri",
-    scope=["user:email", "repo", "workflow"]
+# Initialize the auth client
+auth = AuthClient(
+    client_id=os.getenv("CLIENT_ID"),
+    client_secret=os.getenv("CLIENT_SECRET"),
+    redirect_uri="http://localhost:8000/callback",
+    scope=["repo", "user:email", "workflow"]
 )
 
-auth_url = authClient.get_auth_url()
+# Get authentication URL
+auth_url = auth.get_auth_url()
 print(f"Visit this URL to authorize: {auth_url}")
+
+# Get access token
 code = input("Enter the authorization code: ")
-token = authClient.get_access_token(code)
-user_info = authClient.get_user_info(token)
+access_token = auth.get_access_token(code)
+
+# Get user information
+user_info = auth.get_user_info(access_token)
 print(user_info)
 ```
 
-### Manage GitHub Workflows
+### Managing Workflows
 
 ```python
-import httpx
-from Github.client import GitHubClient
-from Github.workflow import Workflow
+from github_client_sdk.client import GitHubClient
+from github_client_sdk.workflow import Workflow
 
-client = GitHubClient(token="your_oauth_token", client=httpx)
-workflow = Workflow(client, "github_username", "repository_name")
+# Initialize the client
+client = GitHubClient(token="your_oauth_token")
+
+# Create workflow instance
+workflow = Workflow(client, "username", "repository_name")
+
+# Create a new workflow
+workflow_name = "new-workflow"
+workflow_path = "path/to/workflow.yaml"
+response = workflow.create_workflow(workflow_name, workflow_path)
+print(f"Workflow creation response: {response}")
 
 # List workflows
-workflows = workflow.get_workflows("github_username", "repository_name")
+workflows = workflow.get_workflows()
 print(workflows)
-
-# Create workflow
-response = workflow.create_workflow("workflow_name", "path/to/workflow.yml")
-print(response)
 
 # Delete workflow
 workflow.delete_workflow("workflow_id")
-print("Workflow deleted successfully.")
 ```
 
-### Manage Environment Variables
+### Managing Environment Variables
 
 ```python
-from Github.variables import VariableClient
+from github_client_sdk.variables import Variables
 
-variable_client = VariableClient(client, "github_username", "repository_name")
+# Initialize variables client
+variables = Variables(client, "username", "repository_name")
 
-# Create variable
-response = variable_client.create_variable("MY_ENV_VAR", "value")
-print(response)
+# Get all variables
+all_variables = variables.get_variables()
+print(all_variables)
 
-# Update variable
-response = variable_client.update_variable("MY_ENV_VAR", "new_value")
-print(response)
+# Create a new variable
+variables.create_variable("TEST_VARIABLE", "TEST_VALUE")
+
+# Update an existing variable
+variables.update_variable("TEST_VARIABLE", "NEW_VALUE")
+
+# Get a specific variable
+variable = variables.get_variable("TEST_VARIABLE")
+print(variable)
+
+# Delete a variable
+variables.delete_variable("TEST_VARIABLE")
 ```
 
-## Documentation
+### Using the CLI
 
-Detailed documentation and examples are available at the [GitHub Client SDK Wiki](https://github.com/azimhossaintuhin/github-client-sdk/wiki).
+The SDK comes with a built-in CLI for easy interaction:
+
+```bash
+# Start the interactive shell
+github-client-shell
+
+# Available commands in the shell:
+# 1. authenticate     : Authenticate with GitHub
+# 2. get-user-info   : Fetch and display user info
+# 3. set-env-variable: Set environment variables
+# 4. get-env-variables: Get environment variables
+# 5. logout          : Logout from GitHub
+# 6. clear           : Clear the screen
+# 7. exit            : Exit the shell
+```
+
+## Environment Variables
+
+The SDK requires the following environment variables to be set:
+
+- `CLIENT_ID`: Your GitHub OAuth App client ID
+- `CLIENT_SECRET`: Your GitHub OAuth App client secret
 
 ## Contributing
 
@@ -114,7 +155,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - [GitHub REST API Documentation](https://docs.github.com/en/rest)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [httpx HTTP Client for Python](https://www.python-httpx.org/)
+- [GitHub OAuth Apps Documentation](https://docs.github.com/en/developers/apps/building-oauth-apps)
 
 ---
 

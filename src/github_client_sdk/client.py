@@ -52,10 +52,7 @@ class GitHubClient:
     """
 
     # befor creating the class
-    def __new__(cls, token: str):
-        if not token:
-            raise AuthenticationError("Token is required")
-        return super().__new__(cls)
+
 
     def __init__(self, token: str):
         self.token = token

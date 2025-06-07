@@ -11,7 +11,8 @@ dependencies = [
     "httpx[http2]>=0.28.1,<0.29.0",
     "typer[all] (>=0.15.4,<0.16.0)",
     "pyloaders (>=0.0.5,<0.0.6)",
-    "tabulate (>=0.9.0,<0.10.0)"
+    "tabulate (>=0.9.0,<0.10.0)",
+    "rich (>=14.0.0,<15.0.0)"
 ]
 license = {text = "MIT"}
 classifiers = [
@@ -35,10 +36,16 @@ keywords = [
     "github actions", "workflow management", "oauth authentication", "devops"
 ]
 
+[project.scripts]
+gcs = "gcs_cli.main:main"
+
 [tool.poetry]
 name = "github-client-sdk"
 version = "1.1.1"
-packages = [{include = "github_client_sdk", from = "src"}]
+packages = [
+    {include = "github_client_sdk", from = "src"},
+    {include = "gcs_cli", from = "src"}
+]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.5"
